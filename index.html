@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaliteSofware - Güncelleniyoruz</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                        dark: '#0f172a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col">
+
+    <div class="fixed top-6 right-6 z-50">
+        <div class="bg-white/80 backdrop-blur-md p-1 rounded-2xl border border-slate-200 shadow-xl flex gap-1">
+            <button onclick="setLanguage('tr')" id="btn-tr" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 bg-brand-600 text-white">TR</button>
+            <button onclick="setLanguage('en')" id="btn-en" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 text-slate-600 hover:bg-slate-100">EN</button>
+        </div>
+    </div>
+
+    <main class="flex-grow flex items-center justify-center p-6">
+        <div class="max-w-3xl w-full text-center">
+
+            <div class="relative mb-12 inline-block">
+                <div class="absolute inset-0 bg-brand-200 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+                <div class="relative w-32 h-32 bg-white rounded-[2.5rem] shadow-2xl flex items-center justify-center border border-slate-100">
+                    <svg class="w-16 h-16 text-brand-600 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div id="content-tr" class="lang-content active">
+                <h1 class="text-4xl md:text-6xl font-black text-dark mb-6 tracking-tighter uppercase italic">
+                    Sizlere Daha İyi Hizmet İçin <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-600 text-nowrap">Güncelleniyoruz</span>
+                </h1>
+                <p class="text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
+                    Altyapımızı güçlendiriyoruz. 2025 nesil sunucularımız ve yenilenen arayüzümüzle çok yakında tekrar hizmetinizdeyiz. Sabrınız için teşekkür ederiz.
+                </p>
+            </div>
+
+            <!-- English Content -->
+            <div id="content-en" class="lang-content">
+                <h1 class="text-4xl md:text-6xl font-black text-dark mb-6 tracking-tighter uppercase italic">
+                    We Are <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-600">Updating</span> For Better Service
+                </h1>
+                <p class="text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
+                    We are strengthening our infrastructure. We will be back soon with 2025 generation servers and a renewed interface. Thank you for your patience.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-10 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-slate-400 text-sm font-semibold uppercase tracking-widest italic">
+                &copy; 2025 Tüm Hakları Saklıdır.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('content-' + lang).classList.add('active');
+            const btnTr = document.getElementById('btn-tr');
+            const btnEn = document.getElementById('btn-en');
+            
+            if (lang === 'tr') {
+                btnTr.classList.add('bg-brand-600', 'text-white');
+                btnTr.classList.remove('text-slate-600', 'hover:bg-slate-100');
+                btnEn.classList.remove('bg-brand-600', 'text-white');
+                btnEn.classList.add('text-slate-600', 'hover:bg-slate-100');
+                document.title = "Güncelleniyoruz";
+            } else {
+                btnEn.classList.add('bg-brand-600', 'text-white');
+                btnEn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+                btnTr.classList.remove('bg-brand-600', 'text-white');
+                btnTr.classList.add('text-slate-600', 'hover:bg-slate-100');
+                document.title = "We Are Updating";
+            }
+        }
+    </script>
+</body>
+</html>
