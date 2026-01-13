@@ -1,114 +1,385 @@
-<!DOCTYPE html>
-<html lang="tr" class="scroll-smooth">
+<!doctype html>
+<html lang="tr" class="scroll-smooth dark">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KaliteSofware - Güncelleniyoruz</title>
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KaliteSoftware – Geleceğin Teknolojisi</title>
+    <meta name="description"
+        content="KaliteSoftware ile dijital dönüşümünüzü tamamlayın. Premium yazılım çözümleri, modern web tasarımları ve güvenli altyapılar.">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#f5f3ff',
-                            100: '#ede9fe',
-                            200: '#ddd6fe',
-                            500: '#8b5cf6',
-                            600: '#7c3aed',
-                            700: '#6d28d9',
-                            800: '#5b21b6',
-                            900: '#4c1d95',
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
                         },
-                        dark: '#0f172a'
+                        dark: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                        }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
                     }
                 }
             }
         }
     </script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        .lang-content { display: none; }
-        .lang-content.active { display: block; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-primary {
+            background: linear-gradient(135deg, #818cf8 0%, #4338ca 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col">
 
-    <div class="fixed top-6 right-6 z-50">
-        <div class="bg-white/80 backdrop-blur-md p-1 rounded-2xl border border-slate-200 shadow-xl flex gap-1">
-            <button onclick="setLanguage('tr')" id="btn-tr" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 bg-brand-600 text-white">TR</button>
-            <button onclick="setLanguage('en')" id="btn-en" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 text-slate-600 hover:bg-slate-100">EN</button>
-        </div>
+<body class="bg-[#0f1115] text-white min-h-screen selection:bg-indigo-500 selection:text-white"
+    x-data="{ mobileMenu: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+
+    <!-- Background Effects -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-[128px]"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px]"></div>
     </div>
 
-    <main class="flex-grow flex items-center justify-center p-6">
-        <div class="max-w-3xl w-full text-center">
+    <!-- Header -->
+    <header :class="scrolled ? 'bg-[#0f1115]/80 backdrop-blur-md border-b border-white/5' : 'bg-transparent'"
+        class="fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <p>KaliteSoftware</p>
+            </a>
 
-            <div class="relative mb-12 inline-block">
-                <div class="absolute inset-0 bg-brand-200 rounded-full blur-3xl opacity-30 animate-pulse"></div>
-                <div class="relative w-32 h-32 bg-white rounded-[2.5rem] shadow-2xl flex items-center justify-center border border-slate-100">
-                    <svg class="w-16 h-16 text-brand-600 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path>
-                    </svg>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#hero" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Ana
+                    Sayfa</a>
+                <a href="#services"
+                    class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Hizmetler</a>
+                <a href="#products"
+                    class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Ürünler</a>
+                <a href="#contact"
+                    class="px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg text-sm font-medium transition-all">
+                    İletişime Geç
+                </a>
+            </nav>
+
+            <!-- Mobile Toggle -->
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-gray-300">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenu" x-collapse
+            class="md:hidden bg-[#0f1115] border-b border-white/5 mx-4 mt-2 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <nav class="flex flex-col p-4 space-y-2">
+                <a href="#hero" @click="mobileMenu = false"
+                    class="block px-4 py-3 rounded-xl hover:bg-white/5 text-gray-300 hover:text-white">Ana Sayfa</a>
+                <a href="#services" @click="mobileMenu = false"
+                    class="block px-4 py-3 rounded-xl hover:bg-white/5 text-gray-300 hover:text-white">Hizmetler</a>
+                <a href="#products" @click="mobileMenu = false"
+                    class="block px-4 py-3 rounded-xl hover:bg-white/5 text-gray-300 hover:text-white">Ürünler</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm font-medium mb-8 animate-fade-in-up">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                </span>
+                Yeni Nesil Yazılım Çözümleri
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-8">
+                <span class="text-gradient block mb-2">Dijital Dünyada</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">Kaliteyi
+                    Keşfedin</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                KaliteSoftware olarak, işletmenizi modern web teknolojileri ve özel yazılım çözümleriyle geleceğe
+                taşıyoruz. Hızlı, güvenli ve estetik.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#products"
+                    class="w-full sm:w-auto px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-all shadow-lg shadow-indigo-600/25 flex items-center justify-center gap-2">
+                    <i data-lucide="rocket" class="w-5 h-5"></i>
+                    Projeleri İncele
+                </a>
+                <a href="#contact"
+                    class="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl font-medium transition-all flex items-center justify-center gap-2">
+                    Detaylı Bilgi
+                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-10">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-white mb-1">500+</div>
+                    <div class="text-sm text-gray-500">Mutlu Müşteri</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-white mb-1">%99.9</div>
+                    <div class="text-sm text-gray-500">Uptime</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-white mb-1">7/24</div>
+                    <div class="text-sm text-gray-500">Teknik Destek</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-white mb-1">5 Yıldır</div>
+                    <div class="text-sm text-gray-500">Sektördeyiz</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-[#0A0C10]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Hizmetlerimiz</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Sizin için en iyi teknolojileri kullanarak özel çözümler
+                    üretiyoruz.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass glass-hover p-8 rounded-2xl transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="layout" class="w-7 h-7 text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Web & UI Tasarım</h3>
+                    <p class="text-gray-400 leading-relaxed">Kullanıcı deneyimini ön planda tutan, modern ve etkileyici
+                        arayüz tasarımları.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass glass-hover p-8 rounded-2xl transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="code-2" class="w-7 h-7 text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Özel Yazılım</h3>
+                    <p class="text-gray-400 leading-relaxed">İhtiyaçlarınıza tam uyum sağlayan, ölçeklenebilir ve
+                        güvenli yazılım mimarileri.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass glass-hover p-8 rounded-2xl transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-pink-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="smartphone" class="w-7 h-7 text-pink-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Mobil Uygulama</h3>
+                    <p class="text-gray-400 leading-relaxed">iOS ve Android platformları için native veya cross-platform
+                        mobil çözümler.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0f1115] to-[#0A0C10] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Öne Çıkan Ürünler</h2>
+                    <p class="text-gray-400 max-w-xl">Hemen kullanmaya başlayabileceğiniz, test edilmiş ve onaylanmış
+                        profesyonel yazılımlar.</p>
+                </div>
+                <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-2">
+                    Tümünü Gör <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="glass rounded-2xl overflow-hidden group">
+                    <div class="relative h-48 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f1115] to-transparent z-10 opacity-60">
+                        </div>
+                        <img src="./img/ebook.jpg" alt="KaliteStore"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold">AI Prompt Listesi</h3>
+                                <div class="text-xs text-indigo-400 mt-1">Dijital Rehber</div>
+                            </div>
+                            <span
+                                class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold">$49</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6">ChatGPT, Midjourney ve Dall-E için hazırlanmış 1000+
+                            profesyonel prompt arşivi.</p>
+                        <a href="#"
+                            class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-all flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20">
+                            <i data-lucide="shopping-cart" class="w-4 h-4"></i> Satın Al
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="glass rounded-2xl overflow-hidden group">
+                    <div class="relative h-48 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f1115] to-transparent z-10 opacity-60">
+                        </div>
+                        <img src="./img/qrmenu.jpg" alt="KaliteStore"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold">QR Menü + Pos System</h3>
+                                <div class="text-xs text-indigo-400 mt-1">SaaS Yazılım</div>
+                            </div>
+                            <span
+                                class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold">$199</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6">Restoran ve kafeler için geliştirilmiş gelişmiş QR Menü ve
+                            sipariş yönetim sistemi.</p>
+                        <a href="#"
+                            class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-all flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20">
+                            <i data-lucide="shopping-cart" class="w-4 h-4"></i> Satın Al
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="glass rounded-2xl overflow-hidden group">
+                    <div class="relative h-48 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f1115] to-transparent z-10 opacity-60">
+                        </div>
+                        <img src="./img/ecommerce.png" alt="E-Ticaret Scriptleri"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold">10+ E-Ticaret Scripti</h3>
+                                <div class="text-xs text-indigo-400 mt-1">Web Yazılım Paketi</div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs font-bold text-white">$299</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6">Her sektöre uygun, modern, mobil uyumlu ve SEO dostu 10+ farklı e-ticaret yazılımı.</p>
+                        <a href="#" class="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="shopping-cart" class="w-4 h-4"></i> Satın Al
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-[#050608] border-t border-white/5 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-2">
+                    <p class="h-8 mb-6">KaliteSoftware</p>
+                    <p class="text-gray-400 max-w-sm mb-8 leading-relaxed">
+                        Dijital dünyada standartları yükseltiyoruz. Kalite, güven ve inovasyonun buluşma noktası.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">İletişim</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-indigo-500"></i>
+                            info@kalitesoftware.com
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <div id="content-tr" class="lang-content active">
-                <h1 class="text-4xl md:text-6xl font-black text-dark mb-6 tracking-tighter uppercase italic">
-                    Sizlere Daha İyi Hizmet İçin <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-600 text-nowrap">Güncelleniyoruz</span>
-                </h1>
-                <p class="text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
-                    Altyapımızı güçlendiriyoruz. 2025 nesil sunucularımız ve yenilenen arayüzümüzle çok yakında tekrar hizmetinizdeyiz. Sabrınız için teşekkür ederiz.
-                </p>
+            <div
+                class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <div>&copy; 2026 KaliteSoftware. Tüm hakları saklıdır.</div>
             </div>
-
-            <!-- English Content -->
-            <div id="content-en" class="lang-content">
-                <h1 class="text-4xl md:text-6xl font-black text-dark mb-6 tracking-tighter uppercase italic">
-                    We Are <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-600">Updating</span> For Better Service
-                </h1>
-                <p class="text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
-                    We are strengthening our infrastructure. We will be back soon with 2025 generation servers and a renewed interface. Thank you for your patience.
-                </p>
-            </div>
-        </div>
-    </main>
-
-    <footer class="py-10 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-slate-400 text-sm font-semibold uppercase tracking-widest italic">
-                &copy; 2025 Tüm Hakları Saklıdır.
-            </p>
         </div>
     </footer>
 
     <script>
-        function setLanguage(lang) {
-            document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
-            document.getElementById('content-' + lang).classList.add('active');
-            const btnTr = document.getElementById('btn-tr');
-            const btnEn = document.getElementById('btn-en');
-            
-            if (lang === 'tr') {
-                btnTr.classList.add('bg-brand-600', 'text-white');
-                btnTr.classList.remove('text-slate-600', 'hover:bg-slate-100');
-                btnEn.classList.remove('bg-brand-600', 'text-white');
-                btnEn.classList.add('text-slate-600', 'hover:bg-slate-100');
-                document.title = "Güncelleniyoruz";
-            } else {
-                btnEn.classList.add('bg-brand-600', 'text-white');
-                btnEn.classList.remove('text-slate-600', 'hover:bg-slate-100');
-                btnTr.classList.remove('bg-brand-600', 'text-white');
-                btnTr.classList.add('text-slate-600', 'hover:bg-slate-100');
-                document.title = "We Are Updating";
-            }
-        }
+        lucide.createIcons();
     </script>
 </body>
+
 </html>
